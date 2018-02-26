@@ -6,8 +6,7 @@ import * as companyAction from "../actions/companies"
 class CompanyList extends React.Component {
 
     componentWillMount = () => {
-       // console.log(this.props)
-       // this.props.getCompaniesList()
+       this.props.getCompaniesList()
     }
 
     render() {
@@ -30,8 +29,11 @@ const mapStateToProps = (state,ownProps) => {
 const mapDispatchToProps = dispatch => {
     return {
         showCompany: (id) => {
-            companyAction.getCompanyInformation(id)
-        }
+            dispatch(companyAction.getCompanyInformation(id))
+        },
+        getCompaniesList: () => {
+            dispatch(companyAction.getCompaniesList())
+        },
     }
 }
 

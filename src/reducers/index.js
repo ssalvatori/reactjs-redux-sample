@@ -1,7 +1,7 @@
 import { combineReducers } from "redux"
 
-import companyReducer from "./companies"
+import companiesReduer from "./companies"
 
 export default combineReducers({
-    companies: companyReducer
+    companiesReduer
 })

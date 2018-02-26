@@ -1,3 +1,5 @@
+
+const API_URL = ""
 /*  action types */
 export const FETCH_COMPANIES = 'FETCH_COMPANIES'
 export const FETCH_COMPANY_INFORMATION = 'FETCH_COMPANY_INFORMATION'
