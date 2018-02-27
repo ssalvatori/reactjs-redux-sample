@@ -1,7 +1,10 @@
 import { combineReducers } from "redux"
 
-import companiesReduer from "./companies"
+import companiesReducer from "./companies"
+
+import { loadingBarReducer } from 'react-redux-loading-bar'
 
 export default combineReducers({
-    companiesReduer
+    companiesReducer,
+    loadingBar: loadingBarReducer,
 })

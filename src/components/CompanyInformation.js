@@ -5,7 +5,7 @@ class CompanyInformation extends React.Component {
     render() {
         return (
             <div>
-                Compnay Information
+                Company Information
             </div>
         );
     }
