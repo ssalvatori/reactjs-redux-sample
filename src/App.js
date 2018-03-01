@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+
+import LoadingBar from 'react-redux-loading-bar';
+
+import CompanyList from './components/CompanyList';
+import CompanyInformation from './components/CompanyInformation';
+
 import './App.css';
-
-import LoadingBar from 'react-redux-loading-bar'
-
-import CompanyList from './components/CompanyList'
-import CompanyInformation from './components/CompanyInformation'
 
 class App extends Component {
   render() {
@@ -15,7 +16,7 @@ class App extends Component {
           <LoadingBar />
         </header>
         <div className="App-intro">
-        
+
           <CompanyList />
 
           <CompanyInformation />

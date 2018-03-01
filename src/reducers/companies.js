@@ -1,34 +1,37 @@
-import { 
+import {
     FETCH_COMPANIES,
     FETCH_COMPANY_INFORMATION,
     FETCH_COMPANIES_PENDING,
     FETCH_COMPANIES_FULFILLED,
     FETCH_COMPANIES_ERROR
-} from '../actions/companies'
+} from '../actions/companies';
 
-const getInitialState = () => ({
+const getInitialState = {
     companies: [],
+    autocomplete: {
+        value: ''
+    },
     fetching: false,
     fetched: false,
-    error: null,
-});
+    error: null
+};
 
-const companyReducer = (state = getInitialState(), action) => {
+const companyReducer = (state = getInitialState, action) => {
     switch (action.type) {
         case FETCH_COMPANIES_PENDING: {
             state = {
                 ...state,
-                fetching: true,
-            }
-            break
+                fetching: true
+            };
+            break;
         }
         case FETCH_COMPANIES_FULFILLED: {
             state = {
                 ...state,
                 fetching: false,
                 fetched: true
-            }
-            break
+            };
+            break;
         }
         case FETCH_COMPANIES_ERROR: {
             state = {
@@ -36,28 +39,27 @@ const companyReducer = (state = getInitialState(), action) => {
                 fetching: false,
                 fetched: false,
                 error: true
-            }
-            break
+            };
+            break;
         }
         case FETCH_COMPANIES: {
             state = {
                 ...state,
-                fetching: true,
-            }
-            break
+                fetching: true
+            };
+            break;
         }
         case FETCH_COMPANY_INFORMATION: {
             state = {
                 ...state,
-                fetching: true,
-            }
-            break
+                fetching: true
+            };
+            break;
         }
         default:
-            break
+            break;
     }
-
-    return state
+    return state;
 };
 
-export default companyReducer
+export default companyReducer;
