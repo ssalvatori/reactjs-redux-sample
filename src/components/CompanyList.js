@@ -9,29 +9,44 @@ import './CompanyList.css';
 
 class CompanyList extends React.Component {
 
+    matchCompanyToTerm(company, value) {
+        return (
+            company.symbol.toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
+            company.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        );
+    }
+
+    getCompanyList(value, companyList) {
+        setTimeout(companyList, 200, value ?
+            this.props.autocomplete.items.filter(company => this.matchCompanyToTerm(company, value)) :
+            this.props.companies
+        );
+    }
+
     render() {
         var autoSelector;
 
         if (this.props.fetched) {
             autoSelector = <Autocomplete
                 value={this.props.autocomplete.value}
-                items={this.props.companies}
+                items={this.props.autocomplete.items}
 
                 inputProps={{ id: 'company-autocomplete' }}
                 wrapperStyle={{ position: 'relative', display: 'inline-block' }}
                 getItemValue={(item) => item.name}
 
-                onSelect={(value, company) => {
-                    this.props.showCompany(value, company);
-                    //this.setState({ value, companyList: [company], companySelected: company.symbol, showDescription: true });
+                /* ITEM SELECTED FROM THEM DROP-DOWN MENU */
+                onSelect={(value, item) => {
+                    this.props.showCompany(value, item);
                 }}
 
+                /* CHANGE IN THE INPUT VALUE */
                 onChange={(event, value) => {
-                    //this.setState({ value, showDescription: false, loading: true, companyList: [] });
-                    this.props.selectCompany(value);
+                    this.props.changeValue(value);
                     clearTimeout(this.requestTimer);
+
                     this.requestTimer = this.getCompanyList(value, (items) => {
-                        this.setState({ companyList: items, loading: false });
+                        this.props.filterList(items);
                     });
 
                 }}
@@ -77,20 +92,27 @@ class CompanyList extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return ({
-        companies: state.companiesReducer.companies,
-        fetched: state.companiesReducer.fetched,
-        autocomplete: state.companiesReducer.autocomplete,
+        companies: state.companies.companies,
+        fetched: state.companies.fetched,
+        autocomplete: state.autocomplete,
         ...ownProps
     });
 };
 
 const mapDispatchToProps = dispatch => {
     return ({
-        showCompany: (id) => {
-            dispatch(companyAction.getCompanyInformation(id));
+        showCompany: (value, item) => {
+            dispatch(companyAction.autocompleteChangeValue(item.name));
+            dispatch(companyAction.getCompanyInformation(item.symbol));
         },
         fetchCompanyList: () => {
             dispatch(companyAction.fetchCompanyList());
+        },
+        changeValue: (value) => {
+            dispatch(companyAction.autocompleteChangeValue(value));
+        },
+        filterList: (items) => {
+            dispatch(companyAction.autocompleteChangeList(items));
         }
     });
 };
@@ -98,7 +120,8 @@ const mapDispatchToProps = dispatch => {
 CompanyList.propTypes = {
     fetchCompanyList: PropTypes.func,
     showCompany: PropTypes.func,
-    selectCompany: PropTypes.func,
+    changeValue: PropTypes.func,
+    filterList: PropTypes.func,
     companies: PropTypes.array,
     autocomplete: PropTypes.object,
     fetched: PropTypes.bool

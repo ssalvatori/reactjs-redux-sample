@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import { loadingBarReducer } from 'react-redux-loading-bar';
 import companiesReducer from './companies';
+import autocompleteReducer from './autocomplete';
 
 export default combineReducers({
-    companiesReducer,
+    companies: companiesReducer,
+    autocomplete: autocompleteReducer,
     loadingBar: loadingBarReducer
 });

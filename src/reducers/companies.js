@@ -8,9 +8,6 @@ import {
 
 const getInitialState = {
     companies: [],
-    autocomplete: {
-        value: ''
-    },
     fetching: false,
     fetched: false,
     error: null
@@ -28,6 +25,7 @@ const companyReducer = (state = getInitialState, action) => {
         case FETCH_COMPANIES_FULFILLED: {
             state = {
                 ...state,
+                companies: action.payload.data,
                 fetching: false,
                 fetched: true
             };
