@@ -3,7 +3,8 @@ import {
     FETCH_COMPANY_INFORMATION,
     FETCH_COMPANIES_PENDING,
     FETCH_COMPANIES_FULFILLED,
-    FETCH_COMPANIES_ERROR
+    FETCH_COMPANIES_ERROR,
+    FETCH_COMPANY_INFORMATION_FULFILLED
 } from '../actions/companies';
 
 const getInitialState = {
@@ -51,6 +52,14 @@ const companyReducer = (state = getInitialState, action) => {
             state = {
                 ...state,
                 fetching: true
+            };
+            break;
+        }
+        case FETCH_COMPANY_INFORMATION_FULFILLED: {
+            state = {
+                ...state,
+                company_information: action.payload.data,
+                fetched: true
             };
             break;
         }

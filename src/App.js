@@ -5,6 +5,8 @@ import LoadingBar from 'react-redux-loading-bar';
 import CompanyList from './components/CompanyList';
 import CompanyInformation from './components/CompanyInformation';
 
+import { Grid, Row, Col } from 'react-bootstrap';
+
 import './App.css';
 
 class App extends Component {
@@ -17,9 +19,25 @@ class App extends Component {
         </header>
         <div className="App-intro">
 
-          <CompanyList />
+          <Grid>
 
-          <CompanyInformation />
+            <Row className="show-grid">
+
+              <Col>
+                <CompanyList />
+              </Col>
+
+            </Row>
+
+            <Row className="show-grid">
+
+              <Col>
+                <CompanyInformation />
+              </Col>
+
+            </Row>
+
+          </Grid>
 
         </div>
       </div>

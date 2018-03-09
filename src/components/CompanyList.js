@@ -5,6 +5,8 @@ import Autocomplete from 'react-autocomplete';
 
 import * as companyAction from '../actions/companies';
 
+import { Button, Badge } from 'react-bootstrap';
+
 import './CompanyList.css';
 
 class CompanyList extends React.Component {
@@ -72,12 +74,15 @@ class CompanyList extends React.Component {
             />;
         }
 
+        let buttonFetchCompanies = !this.props.fetched ? <Button bsStyle="primary" onClick={this.props.fetchCompanyList}>Load Companies</Button> : '';
+
         return (
             <div>
-                <h3>Companies List</h3>
-                <button onClick={this.props.fetchCompanyList}>
-                    Load Companies
-                </button>
+                <h3>
+                    Companies List <Badge>{this.props.companies.length}</Badge>
+                </h3>
+
+                {buttonFetchCompanies}
 
                 <div className="box">
                     {autoSelector}
@@ -89,10 +94,10 @@ class CompanyList extends React.Component {
 
 }
 
-
 const mapStateToProps = (state, ownProps) => {
     return ({
         companies: state.companies.companies,
+        company: state.company,
         fetched: state.companies.fetched,
         autocomplete: state.autocomplete,
         ...ownProps
@@ -123,6 +128,7 @@ CompanyList.propTypes = {
     changeValue: PropTypes.func,
     filterList: PropTypes.func,
     companies: PropTypes.array,
+    company: PropTypes.object,
     autocomplete: PropTypes.object,
     fetched: PropTypes.bool
 };
