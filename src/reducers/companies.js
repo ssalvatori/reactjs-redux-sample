@@ -8,7 +8,7 @@ import {
 } from '../actions/companies';
 
 const getInitialState = {
-    companies: [],
+    list: [],
     fetching: false,
     fetched: false,
     error: null
@@ -26,7 +26,7 @@ const companyReducer = (state = getInitialState, action) => {
         case FETCH_COMPANIES_FULFILLED: {
             state = {
                 ...state,
-                companies: action.payload.data,
+                list: action.payload.data,
                 fetching: false,
                 fetched: true
             };
@@ -52,14 +52,6 @@ const companyReducer = (state = getInitialState, action) => {
             state = {
                 ...state,
                 fetching: true
-            };
-            break;
-        }
-        case FETCH_COMPANY_INFORMATION_FULFILLED: {
-            state = {
-                ...state,
-                company_information: action.payload.data,
-                fetched: true
             };
             break;
         }

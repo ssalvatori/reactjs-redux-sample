@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 
 import LoadingBar from 'react-redux-loading-bar';
 
-import CompanyList from './components/CompanyList';
-import CompanyInformation from './components/CompanyInformation';
-
-import { Grid, Row, Col } from 'react-bootstrap';
+import CompanyInformation from './containers/CompanyInformation';
 
 import './App.css';
 
@@ -19,25 +16,7 @@ class App extends Component {
         </header>
         <div className="App-intro">
 
-          <Grid>
-
-            <Row className="show-grid">
-
-              <Col>
-                <CompanyList />
-              </Col>
-
-            </Row>
-
-            <Row className="show-grid">
-
-              <Col>
-                <CompanyInformation />
-              </Col>
-
-            </Row>
-
-          </Grid>
+          <CompanyInformation />
 
         </div>
       </div>

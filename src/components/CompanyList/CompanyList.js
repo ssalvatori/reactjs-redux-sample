@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import Autocomplete from 'react-autocomplete';
 
-import * as companyAction from '../actions/companies';
+import Autocomplete from 'react-autocomplete';
 
 import { Button, Badge } from 'react-bootstrap';
 
@@ -94,33 +92,6 @@ class CompanyList extends React.Component {
 
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return ({
-        companies: state.companies.companies,
-        company: state.company,
-        fetched: state.companies.fetched,
-        autocomplete: state.autocomplete,
-        ...ownProps
-    });
-};
-
-const mapDispatchToProps = dispatch => {
-    return ({
-        showCompany: (value, item) => {
-            dispatch(companyAction.autocompleteChangeValue(item.name));
-            dispatch(companyAction.getCompanyInformation(item.symbol));
-        },
-        fetchCompanyList: () => {
-            dispatch(companyAction.fetchCompanyList());
-        },
-        changeValue: (value) => {
-            dispatch(companyAction.autocompleteChangeValue(value));
-        },
-        filterList: (items) => {
-            dispatch(companyAction.autocompleteChangeList(items));
-        }
-    });
-};
 
 CompanyList.propTypes = {
     fetchCompanyList: PropTypes.func,
@@ -128,9 +99,8 @@ CompanyList.propTypes = {
     changeValue: PropTypes.func,
     filterList: PropTypes.func,
     companies: PropTypes.array,
-    company: PropTypes.object,
     autocomplete: PropTypes.object,
     fetched: PropTypes.bool
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompanyList);
+export default CompanyList;
