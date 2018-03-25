@@ -9,13 +9,22 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import CompanyDescription from '../components/CompanyDescription';
 import CompanyList from '../components/CompanyList';
 
+import './CompanyInformation.css'
+
 class CompanyInformation extends React.Component {
 
     render() {
+
+        var company_information = "";
+
+        if (this.props.company.fetched) {
+            company_information = <CompanyDescription company={this.props.company.information} />
+        }
+
         return (
             <Grid>
 
-                <Row className="show-grid">
+                <Row className="company-list">
 
                     <Col>
                         <CompanyList
@@ -34,7 +43,7 @@ class CompanyInformation extends React.Component {
                 <Row className="show-grid">
 
                     <Col>
-                        <CompanyDescription />
+                        {company_information}
                     </Col>
 
                 </Row>
