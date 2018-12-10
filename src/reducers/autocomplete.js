@@ -1,9 +1,9 @@
 import {
-    FETCH_COMPANIES_FULFILLED,
+    FETCH_ALBUMS_FULFILLED,
     AUTOCOMPLETE_SELECT,
     AUTOCOMPLETE_CHANGE_VALUE,
     AUTOCOMPLETE_CHANGE_LIST
-} from '../actions/companies';
+} from '../actions/albums';
 
 const getInitialState = {
     items: [],
@@ -12,7 +12,7 @@ const getInitialState = {
 
 const autocompleteReducer = (state = getInitialState, action) => {
     switch (action.type) {
-        case FETCH_COMPANIES_FULFILLED: {
+        case FETCH_ALBUMS_FULFILLED: {
             state = {
                 ...state,
                 items: action.payload.data

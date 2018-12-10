@@ -4,7 +4,7 @@ import { PageHeader } from 'react-bootstrap';
 
 import LoadingBar from 'react-redux-loading-bar';
 
-import CompanyInformation from './containers/CompanyInformation';
+import AlbumInformation from './containers/AlbumInformation';
 
 import './App.css';
 
@@ -21,7 +21,7 @@ class App extends Component {
 
         <div className="App-intro">
 
-          <CompanyInformation />
+          <AlbumInformation />
 
         </div>
       </div>
