@@ -1,8 +1,8 @@
 import {
-    FETCH_COMPANY_INFORMATION,
-    FETCH_COMPANY_INFORMATION_FULFILLED,
-    FETCH_COMPANY_INFORMATION_PENDING
-} from '../actions/companies';
+    FETCH_ALBUM_INFORMATION,
+    FETCH_ALBUM_INFORMATION_FULFILLED,
+    FETCH_ALBUM_INFORMATION_PENDING
+} from '../actions/albums';
 
 const getInitialState = {
     information: {},
@@ -11,16 +11,16 @@ const getInitialState = {
     error: null
 };
 
-const companyReducer = (state = getInitialState, action) => {
+const albumReducer = (state = getInitialState, action) => {
     switch (action.type) {
-        case FETCH_COMPANY_INFORMATION: {
+        case FETCH_ALBUM_INFORMATION: {
             state = {
                 ...state,
                 fetching: true
             };
             break;
         }
-        case FETCH_COMPANY_INFORMATION_FULFILLED: {
+        case FETCH_ALBUM_INFORMATION_FULFILLED: {
             state = {
                 ...state,
                 information: action.payload.data,
@@ -28,7 +28,7 @@ const companyReducer = (state = getInitialState, action) => {
             };
             break;
         }
-        case FETCH_COMPANY_INFORMATION_PENDING: {
+        case FETCH_ALBUM_INFORMATION_PENDING: {
             state = {
                 ...state,
                 getInitialState
@@ -41,4 +41,4 @@ const companyReducer = (state = getInitialState, action) => {
     return state;
 };
 
-export default companyReducer;
+export default albumReducer;

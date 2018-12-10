@@ -5,21 +5,20 @@ import Autocomplete from 'react-autocomplete';
 
 import { Button, Badge } from 'react-bootstrap';
 
-import './CompanyList.css';
+import './AlbumList.css';
 
-class CompanyList extends React.Component {
+class AlbumList extends React.Component {
 
-    matchCompanyToTerm(company, value) {
+    matchAlbumToTerm(album, value) {
         return (
-            company.symbol.toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
-            company.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
+            album.title.toLowerCase().indexOf(value.toLowerCase()) !== -1
         );
     }
 
-    getCompanyList(value, companyList) {
-        setTimeout(companyList, 200, value ?
-            this.props.autocomplete.items.filter(company => this.matchCompanyToTerm(company, value)) :
-            this.props.companies
+    getAlbumList(value, albumList) {
+        setTimeout(albumList, 200, value ?
+            this.props.autocomplete.items.filter(album => this.matchAlbumToTerm(album, value)) :
+            this.props.albums
         );
     }
 
@@ -31,13 +30,13 @@ class CompanyList extends React.Component {
                 value={this.props.autocomplete.value}
                 items={this.props.autocomplete.items}
 
-                inputProps={{ id: 'company-autocomplete' }}
+                inputProps={{ id: 'album-autocomplete' }}
                 wrapperStyle={{ position: 'relative', display: 'inline-block' }}
-                getItemValue={(item) => item.name}
+                getItemValue={(item) => item.title}
 
                 /* ITEM SELECTED FROM THEM DROP-DOWN MENU */
                 onSelect={(value, item) => {
-                    this.props.showCompany(value, item);
+                    this.props.showAlbum(value, item);
                 }}
 
                 /* CHANGE IN THE INPUT VALUE */
@@ -45,7 +44,7 @@ class CompanyList extends React.Component {
                     this.props.changeValue(value);
                     clearTimeout(this.requestTimer);
 
-                    this.requestTimer = this.getCompanyList(value, (items) => {
+                    this.requestTimer = this.getAlbumList(value, (items) => {
                         this.props.filterList(items);
                     });
 
@@ -54,7 +53,7 @@ class CompanyList extends React.Component {
                 renderMenu={(items, value) => (
                     <div className="menu">
                         {value === '' ? (
-                            <div className="item">Type of the name or symbol of a Company</div>
+                            <div className="item">Type of the title Album</div>
                         ) : this.props.autocomplete.loading ? (
                             <div className="item">Loading...</div>
                         ) : items.length === 0 ? (
@@ -66,21 +65,21 @@ class CompanyList extends React.Component {
                 renderItem={(item, isHighlighted) => (
                     <div
                         className={`item ${isHighlighted ? 'item-highlighted' : ''}`}
-                        key={item.symbol}
-                    ><strong>({item.symbol})</strong>:{item.name}</div>
+                        key={item.id}
+                    ><strong>({item.title})</strong>:{item.title}</div>
                 )}
             />;
         }
 
-        let buttonFetchCompanies = !this.props.fetched ? <Button bsStyle="primary" onClick={this.props.fetchCompanyList}>Load Companies</Button> : '';
+        let buttonFetchAlbums = !this.props.fetched ? <Button bsStyle="primary" onClick={this.props.fetchAlbumList}>Load Albums</Button> : '';
 
         return (
             <div>
                 <h3>
-                    Companies List <Badge>{this.props.companies.length}</Badge>
+                    Albums List <Badge>{this.props.albums.length}</Badge>
                 </h3>
 
-                {buttonFetchCompanies}
+                {buttonFetchAlbums}
 
                 <div className="box">
                     {autoSelector}
@@ -93,14 +92,14 @@ class CompanyList extends React.Component {
 }
 
 
-CompanyList.propTypes = {
-    fetchCompanyList: PropTypes.func,
-    showCompany: PropTypes.func,
+AlbumList.propTypes = {
+    fetchAlbumList: PropTypes.func,
+    showAlbum: PropTypes.func,
     changeValue: PropTypes.func,
     filterList: PropTypes.func,
-    companies: PropTypes.array,
+    albums: PropTypes.array,
     autocomplete: PropTypes.object,
     fetched: PropTypes.bool
 };
 
-export default CompanyList;
+export default AlbumList;

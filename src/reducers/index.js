@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import { loadingBarReducer } from 'react-redux-loading-bar';
-import companiesReducer from './companies';
-import companyReducer from './company';
+import albumsReducer from './albums';
+import albumReducer from './album';
 import autocompleteReducer from './autocomplete';
 
 export default combineReducers({
-    companies: companiesReducer,
+    albums: albumsReducer,
     autocomplete: autocompleteReducer,
     loadingBar: loadingBarReducer,
-    company: companyReducer
+    album: albumReducer
 });
